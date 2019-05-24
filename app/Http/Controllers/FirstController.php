@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\MakaleModal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\FirstModal;
@@ -40,6 +41,12 @@ class FirstController extends Controller
         $game = FirstModal::whereId($id)->get();
 
         return response()->json($game);
+    }
+    public function destroy($id)
+    {
+        $game = FirstModal::find($id);
+        $game->delete();
+        return redirect('/')->with('success','Veriler Silindi');
     }
 
 

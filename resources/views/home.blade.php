@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">{{ Auth::user()->name }}</div>
 
@@ -97,6 +97,80 @@
                                                         <input _ngcontent-c2="" class="btn btn-success btnYeniKonuEkle" type="submit" value="Kaydet">
                                                     </div>
                                                 </form>
+                                                @if( Auth::user()->authority)
+                                                    <center><table class="table table-striped" style="width:100%" >
+                                                        <tr>
+
+                                                                <th>Id</th>
+                                                                <th>Öğretim Elemanı</th>
+
+
+                                                            <th>WOS H Index</th>
+                                                            <th>WOS Atıf Sayısı</th>
+
+                                                            <th>Scopus H Index</th>
+                                                            <th>Scopus Atıf Sayısı</th>
+                                                            <th>Uzmanlık Alanı</th>
+
+
+
+                                                            <th>Delete</th>
+                                                        </tr>
+
+                                                        @foreach($game as $games)
+                                                            @if(Auth::user()->authority == 1)
+                                                                <tr>
+
+                                                                    <th>{{$games->id}}</th>
+                                                                    <td>{{$games->ogretim_elemani}}</td>
+
+                                                                    <td>{{$games->wos_h_index}}</td>
+                                                                    <td>{{$games->wos_atif_sayisi}}</td>
+                                                                    <td>{{$games->scopus_h_index}}</td>
+                                                                    <td>{{$games->scopus_atif_sayisi}}</td>
+                                                                    <td>{{$games->uzmanlik_alani}}</td>
+
+
+
+                                                                    <td>
+                                                                        <form method="post" class="delete_form" action="{{action('FirstController@destroy', $games->id)}}">
+                                                                            {{csrf_field()}}
+                                                                            <input type="hidden" name="_method" value="DELETE"/>
+                                                                            <button type="submit" class="btn btn-danger">Delete</button>
+
+
+                                                                        </form>
+
+                                                                    </td>
+                                                                </tr>
+
+
+
+                                                            @elseif ($games->yazarlar == Auth::user()->name && Auth::user()->authority == 0)
+
+                                                                <tr>
+                                                                    <td>{{$games->isim}}</td>
+                                                                    <td>{{$games->endeks_turu}}</td>
+
+                                                                    <td>{{$games->yazarlar}}</td>
+
+                                                                    <td>
+                                                                        <form method="post" class="delete_form" action="{{action('FirstController@destroy', $games->id)}}">
+                                                                            {{csrf_field()}}
+                                                                            <input type="hidden" name="_method" value="DELETE"/>
+                                                                            <button type="submit" class="btn btn-danger">Delete</button>
+
+
+                                                                        </form>
+
+                                                                    </td>
+                                                                </tr>
+
+                                                            @endif
+                                                        @endforeach
+
+                                                    </table></center>
+                                                @endif
                                                 <div _ngcontent-c2="" class="form-group">
                                                     <p _ngcontent-c2="">
                                                         <ngb-alert _ngcontent-c2="">
@@ -412,6 +486,74 @@
                                                         <input _ngcontent-c2="" class="btn btn-success btnYeniKonuEkle" type="submit" value="Kaydet">
                                                     </div>
                                                 </form>
+
+                                                <center><table class="table table-striped" style="width:100%" >
+                                                        <tr>
+                                                            @if( Auth::user()->authority)
+                                                                <th>Id</th>
+                                                                <th>Öğretim Elemanı</th>
+                                                            @endif
+
+                                                            <th>Proje Adı</th>
+                                                            <th>Proje Türü</th>
+
+                                                            <th>Proje Yürütücüsü</th>
+
+                                                            <th>Edit</th>
+                                                            <th>Delete</th>
+                                                        </tr>
+
+                                                        @foreach($projes as $item)
+                                                            @if(Auth::user()->authority == 1)
+                                                                <tr>
+                                                                    @if( Auth::user()->authority)
+                                                                        <th>{{$item->id}}</th>
+                                                                        <td>{{$item->ogretim_elemani}}</td>
+                                                                    @endif
+                                                                    <td>{{$item->proje_adi}}</td>
+                                                                    <td>{{$item->proje_turu}}</td>
+                                                                    <td>{{$item->proje_yurutucusu}}</td>
+
+
+                                                                    <td><a href="{{action('ProjeController@edit', $item->id)}}" class="btn btn-warning" >Edit</a> </td>
+                                                                    <td>
+                                                                        <form method="post" class="delete_form" action="{{action('ProjeController@destroy', $item->id)}}">
+                                                                            {{csrf_field()}}
+                                                                            <input type="hidden" name="_method" value="DELETE"/>
+                                                                            <button type="submit" class="btn btn-danger">Delete</button>
+
+
+                                                                        </form>
+
+                                                                    </td>
+                                                                </tr>
+
+
+
+                                                            @elseif ($item->ogretim_elemani == Auth::user()->name && Auth::user()->authority == 0)
+
+                                                                <tr>
+                                                                    <td>{{$item->proje_adi}}</td>
+                                                                    <td>{{$item->proje_adi}}</td>
+
+                                                                    <td>{{$item->proje_yurutucusu}}</td>
+                                                                    <td><a href="{{action('ProjeController@edit', $item->id)}}" class="btn btn-warning" >Edit</a> </td>
+                                                                    <td>
+                                                                        <form method="post" class="delete_form" action="{{action('ProjeController@destroy', $item->id)}}">
+                                                                            {{csrf_field()}}
+                                                                            <input type="hidden" name="_method" value="DELETE"/>
+                                                                            <button type="submit" class="btn btn-danger">Delete</button>
+
+
+                                                                        </form>
+
+                                                                    </td>
+                                                                </tr>
+
+                                                            @endif
+                                                        @endforeach
+
+                                                    </table></center>
                                             </div>
                                         </div>
                                     </div>
@@ -481,9 +623,66 @@
                                                         <input _ngcontent-c2="" class="btn btn-success btnYeniKonuEkle" type="submit" value="Kaydet">
                                                     </div>
                                                 </form>
+                                                @if( Auth::user()->authority)
+                                                    <center><table class="table table-striped" style="width:100%" >
+                                                            <tr>
+
+                                                                <th>Öğretim Elemanı</th>
+                                                                <th>Tezli yüksek lisans öğrenci sayısı</th>
 
 
-                                            </div>                                    </div>
+                                                                <th>Doktora öğrenci sayısı</th>
+                                                                <th>Doktora mezun sayısı</th>
+
+                                                                <th>Faal olan öğretim üyesi teknoloji şirketi sayısı</th>
+                                                                <th>YÖK 100/2000 doktora burs programı alan sayısı</th>
+                                                                <th>YÖK 100/2000 Doktora burs programı öğrenci sayısı</th>
+                                                                <th>Ulusal patent belge sayısı</th>
+
+
+                                                                <th>Faydalı model ve endüstriyel tasarım sayısı</th>
+                                                                <th>TÜBA ve TÜBİTAK ödüllü öğretim üyesi sayısı</th>
+
+
+                                                                <th>Delete</th>
+                                                            </tr>
+
+                                                            @foreach($birims as $item)
+
+                                                                <tr>
+
+
+                                                                    <td>{{$item->ogretim_elemani}}</td>
+                                                                    <th>{{$item->tezli_yuksek_lisans}}</th>
+                                                                    <th>{{$item->doktora_ogrenci}}</th>
+                                                                    <th>{{$item->doktor_mezun}}</th>
+                                                                    <th>{{$item->faal_olan_ogretim_uysei_teknoloji_sirket_sayisi}}</th>
+                                                                    <th>{{$item->doktora_burs_programi_alan_sayisi}}</th>
+                                                                    <th>{{$item->doktora_burs_programi_ogrenci_sayisi}}</th>
+                                                                    <th>{{$item->ulusal_patent_belge_sayisi}}</th>
+                                                                    <th>{{$item->faydali_model_ve_endustriyel_tasarim_sayisi}}</th>
+                                                                    <th>{{$item->odullu_ogrenci_sayisi}}</th>
+                                                                    <td>
+                                                                        <form method="post" class="delete_form" action="{{action('BirimController@destroy', $item->id)}}">
+                                                                            {{csrf_field()}}
+                                                                            <input type="hidden" name="_method" value="DELETE"/>
+                                                                            <button type="submit" class="btn btn-danger">Delete</button>
+
+
+                                                                        </form>
+
+                                                                    </td>
+
+
+
+
+                                                                </tr>
+
+                                                            @endforeach
+                                                        @endif
+                                                    </table></center>
+
+                                            </div>
                                     </div>
                                 </div>
                                 <div class="panel panel-default">

@@ -27,7 +27,7 @@ class MakaleController extends Controller
         $makale->endeks_turu = $request->input('endeks_turu');
         $makale->isim = $request->input('isim');
 
-        $makale->yazarlar = implode($request->input('yazarlar'),', ');
+        $makale->yazarlar =$request->input('yazarlar');
         $makale->dergi_adi = $request->input('dergi_adi');
         $makale->konferans_adi = $request->input('konferans_adi');
         $makale->cilt = $request->input('cilt');

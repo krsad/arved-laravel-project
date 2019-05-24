@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\MakaleModal;
 use App\Proje;
+use App\UserModel;
 use Illuminate\Http\Request;
 
 class ProjeController extends Controller
@@ -46,4 +48,61 @@ class ProjeController extends Controller
         $proje1= Proje::whereId($id)->get();
 
         return response()->json(proje1);
-    }}
+    }
+    public function edit($id)
+    {
+        $users=UserModel::all();
+
+        $proje = Proje::find($id);
+        return view('editProje', compact('proje', 'id','users') );
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\birim  $birim
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->validate($request,[
+
+        ]);
+
+        $proje = Proje::find($id);
+        $proje->ogretim_elemani = $request->get('ogretim_elemani');
+        $proje->kurum_ici_proje = $request->get('kurum_ici_proje');
+        $proje->uluslararasi_proje = $request->get('uluslararasi_proje');
+        $proje->proje_durumu = $request->get('proje_durumu');
+        $proje->proje_turu = $request->get('proje_turu');
+        $proje->alan_bilgisi = $request->get('alan_bilgisi');
+        $proje->proje_adi = $request->get('proje_adi');
+        $proje->proje_butcesi = $request->get('proje_butcesi');
+        $proje->para_birimi = $request->get('para_birimi');
+        $proje->kontratli_proje = $request->get('kontratli_proje');
+        $proje->dis_destekli_proje= $request->get('dis_destekli_proje');
+        $proje->uluslararasi_isbirlikli_proje= $request->get('uluslararasi_isbirlikli_proje');
+        $proje->arastirmaci_sayisi= $request->get('arastirmaci_sayisi');
+        $proje->proje_yurutucusu= $request->get('proje_yurutucusu');
+
+        $proje->save();
+        return redirect('/')->with('success','Veriler Güncellendi');
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\birim  $birim
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $proje = Proje::find($id);
+        $proje->delete();
+        return redirect('/')->with('success','Veriler Silindi');
+    }
+
+}

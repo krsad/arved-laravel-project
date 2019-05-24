@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\makale;
 use App\MakaleModal;
 use App\Product;
+use App\birim;
+use App\Proje;
 use App\UserModel;
 use Illuminate\Http\Request;
 use App\FirstModal;
@@ -31,7 +33,9 @@ class HomeController extends Controller
         $game = FirstModal::query()->get();
         $makales = MakaleModal::query()->get();
         $users = UserModel::query()->get();
-        return view('home',compact('game','makales','users'));
+        $projes = Proje::query()->get();
+        $birims = birim::query()->get();
+        return view('home',compact('game','makales','users','projes','birims'));
     }
 
 

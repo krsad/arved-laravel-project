@@ -101,8 +101,10 @@ class BirimController extends Controller
      * @param  \App\birim  $birim
      * @return \Illuminate\Http\Response
      */
-    public function destroy(birim $birim)
+    public function destroy($id)
     {
-        //
+        $birim = birim::find($id);
+        $birim->delete();
+        return redirect('/')->with('success123','Veriler Silindi');
     }
 }
