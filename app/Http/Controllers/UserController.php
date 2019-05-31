@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Arved\Http\Controllers;
 
-use App\UserModel;
+use Arved\FirstModal;
+use Arved\UserModel;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -26,7 +27,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
+
     }
 
     /**
@@ -35,9 +37,22 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function update(Request $request,$id)
     {
-        //
+        $this->validate($request,[
+
+        ]);
+
+        $first = UserModel::find($id);
+        $first->wos_h_index = $request->get('wos_h_index');
+        $first->wos_atif_sayisi = $request->get('wos_atif_sayisi');
+        $first->scopus_h_index = $request->get('scopus_h_index');
+        $first->scopus_atif_sayisi = $request->get('scopus_atif_sayisi');
+        $first->uzmanlik_alani = $request->get('uzmanlik_alani');
+
+        $first->save();
+        return redirect('/')->with('success123','Veriler Güncellendi');
+
     }
 
     /**
@@ -48,7 +63,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $game = UserModel::whereId($id)->get();
+
+        return response()->json($game);
     }
 
     /**
@@ -59,7 +76,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $users=UserModel::all();
+
+        return view('editProje', compact('proje', 'id','users') );
     }
 
     /**
@@ -69,9 +88,20 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function store(Request $request){
+        $first = new UserModel();
+
+        $first->wos_h_index = $request->input('wos_h_index');
+        $first->wos_atif_sayisi = $request->input('wos_atif_sayisi');
+        $first->scopus_h_index = $request->input('scopus_h_index');
+        $first->scopus_atif_sayisi = $request->input('scopus_atif_sayisi');
+        $first->uzmanlik_alani = $request->input('uzmanlik_alani');
+
+        $first->save();
+        return redirect('/')->with('success','Personel Bilgileri Kaydedildi');
+        //return response()->json($first);
+
+
     }
 
     /**
@@ -82,6 +112,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $makale = UserModel::find($id);
+        $makale->delete();
+        return redirect('/')->with('success','Veriler Silindi');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Arved;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -16,7 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','wos_h_index','wos_atif_sayisi','scopus_h_index','scopus_atif_sayisi','uzmanlik_alani'
     ];
 
     /**

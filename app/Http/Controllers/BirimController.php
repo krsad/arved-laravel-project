@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Arved\Http\Controllers;
 
-use App\birim;
-use App\FirstModal;
-use App\MakaleModal;
+use Arved\birim;
+use Arved\FirstModal;
+use Arved\MakaleModal;
 use Illuminate\Http\Request;
 
 class BirimController extends Controller
@@ -62,7 +62,7 @@ class BirimController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\birim  $birim
+     * @param  \Arved\birim  $birim
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -75,7 +75,7 @@ class BirimController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\birim  $birim
+     * @param  \Arved\birim  $birim
      * @return \Illuminate\Http\Response
      */
     public function edit(birim $birim)
@@ -87,7 +87,7 @@ class BirimController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\birim  $birim
+     * @param  \Arved\birim  $birim
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, birim $birim)
@@ -98,7 +98,7 @@ class BirimController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\birim  $birim
+     * @param  \Arved\birim  $birim
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

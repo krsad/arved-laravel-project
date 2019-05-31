@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Arved\Http\Controllers;
 
-use App\birim;
-use App\MakaleModal;
+use Arved\birim;
+use Arved\MakaleModal;
+use Arved\UserModel;
 use Illuminate\Http\Request;
 
 class MakaleController extends Controller
@@ -12,8 +13,8 @@ class MakaleController extends Controller
     public function index()
     {
         $makale = makaleModal::all();
-
-        return view('makale.index', compact('makale'));
+        $users = UserModel::all();
+        return view('makale.index', compact('makale','users'));
     }
 
     public function create()
@@ -26,8 +27,8 @@ class MakaleController extends Controller
         $makale->yayin_turu = $request->input('yayin_turu');
         $makale->endeks_turu = $request->input('endeks_turu');
         $makale->isim = $request->input('isim');
+        $makale->yazarlar = implode($request->input('yazarlar'),', ');
 
-        $makale->yazarlar =$request->input('yazarlar');
         $makale->dergi_adi = $request->input('dergi_adi');
         $makale->konferans_adi = $request->input('konferans_adi');
         $makale->cilt = $request->input('cilt');
@@ -54,7 +55,8 @@ class MakaleController extends Controller
     public function edit($id)
     {
         $makale = MakaleModal::find($id);
-        return view('edit', compact('makale', 'id') );
+        $users = UserModel::all();
+        return view('edit', compact('makale', 'id', 'users') );
 
     }
 
@@ -62,7 +64,7 @@ class MakaleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\birim  $birim
+     * @param  \Arved\birim  $birim
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -96,7 +98,7 @@ class MakaleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\birim  $birim
+     * @param  \Arved\birim  $birim
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

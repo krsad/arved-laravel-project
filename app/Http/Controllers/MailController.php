@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Arved\Http\Controllers;
 
-use App\Mail\mailtrap;
+use Arved\Mail\mailtrap;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 

@@ -61,8 +61,17 @@
                             </div>
 
                             <div _ngcontent-c2="" class="form-group">
-                                <label _ngcontent-c2="" class="birimlerLabel">Yazar Listesi:</label>
-                                <input _ngcontent-c2="" name="yazarlar" value="{{ $makale->yazarlar }}" value="{{Auth::user()->name}}" class="textFull form-control ng-untouched ng-pristine ng-valid" maxlength="100" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="text">
+                                <label for="yazarlar" class="birimlerLabel" style="width:25%">Yazar Listesi:(Birden Fazla Seçebilirsiniz)</label>
+
+
+
+                                <select multiple class="form-control"   name="yazarlar[]"  style="width:70%">
+
+
+                                    @foreach($users as $item)
+                                        <option value="{{$item->name}}" >{{$item->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div _ngcontent-c2="" class="form-group">
                                 <label _ngcontent-c2="" class="birimlerLabel">Dergi Adı:</label>

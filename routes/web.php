@@ -16,7 +16,7 @@
 Auth::routes(['verify'=> true]);
 
 Route::get('/', array('as'=>'index','uses'=>'HomeController@index') );
-Route::resource('firsts','FirstController');
+Route::resource('users','UserController');
 Route::resource('makales','MakaleController');
 
 

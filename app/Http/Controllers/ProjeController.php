@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Arved\Http\Controllers;
 
-use App\MakaleModal;
-use App\Proje;
-use App\UserModel;
+use Arved\MakaleModal;
+use Arved\Proje;
+use Arved\UserModel;
 use Illuminate\Http\Request;
 
 class ProjeController extends Controller
@@ -62,7 +62,7 @@ class ProjeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\birim  $birim
+     * @param  \Arved\birim  $birim
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -95,7 +95,7 @@ class ProjeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\birim  $birim
+     * @param  \Arved\birim  $birim
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

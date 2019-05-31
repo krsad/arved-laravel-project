@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Arved\Http\Controllers;
 
-use App\makale;
-use App\MakaleModal;
-use App\Product;
-use App\birim;
-use App\Proje;
-use App\UserModel;
+use Arved\makale;
+use Arved\MakaleModal;
+use Arved\Product;
+use Arved\birim;
+use Arved\Proje;
+use Arved\UserModel;
 use Illuminate\Http\Request;
-use App\FirstModal;
+use Arved\FirstModal;
 
 class HomeController extends Controller
 {
@@ -30,6 +30,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //game artık home page de personel bilgileri objesi
         $game = FirstModal::query()->get();
         $makales = MakaleModal::query()->get();
         $users = UserModel::query()->get();

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Arved;
 
 use Illuminate\Database\Eloquent\Model;
 

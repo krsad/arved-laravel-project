@@ -60,38 +60,42 @@
                                     <div id="collapseOne" class="panel-collapse collapse in" data-parent="#accordion" role="tabpanel" aria-labelledby="headingOne">
                                         <br><br> <div class="panel-body">
                                             <div _ngcontent-c2="">
-                                                <form method="POST" action="{{route('firsts.store')}}">
+                                                {{ Auth::user()->id }}
+                                                <form method="POST" action="{{action('UserController@update',Auth::user()->id )}}">
+                                                    <input type="hidden" name="_method" value="PATCH"/>
                                                     @csrf
                                                     <br><br>
-                                                    <div _ngcontent-c2="" class="form-group">
-                                                        <label _ngcontent-c2="" class="birimlerLabel">Öğretim Elemanı:</label>
-                                                        <input _ngcontent-c2="" name="ogretim_elemani" value="{{ Auth::user()->name }}" class="textFull form-control ng-untouched ng-pristine ng-valid" readonly type="text">
 
-                                                    </div>
+
+                                                        <div _ngcontent-c2="" class="form-group">
+                                                            <label _ngcontent-c2="" class="birimlerLabel">Proje Yürütücüsü</label>
+                                                            <input _ngcontent-c2=""  value="{{ Auth::user()->name }}" class="textFull form-control ng-untouched ng-pristine ng-valid" readonly type="text">
+
+                                                        </div>
 
                                                     <!----><div _ngcontent-c2="">
                                                         <div _ngcontent-c2="" class="form-group">
                                                             <label _ngcontent-c2="" class="birimlerLabel">WOS H Index:</label>
-                                                            <input _ngcontent-c2="" name="wos_h_index" class="textFull form-control ng-untouched ng-pristine ng-valid" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number">
+                                                            <input _ngcontent-c2="" name="wos_h_index" value="{{ Auth::user()->wos_h_index }}"  class="textFull form-control ng-untouched ng-pristine ng-valid" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number">
                                                         </div>
 
                                                         <div _ngcontent-c2="" class="form-group">
                                                             <label _ngcontent-c2="" class="birimlerLabel">WOS Atıf Sayısı:</label>
-                                                            <input _ngcontent-c2="" name="wos_atif_sayisi" class="textFull form-control ng-untouched ng-pristine ng-valid" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number">
+                                                            <input _ngcontent-c2="" name="wos_atif_sayisi" value="{{ Auth::user()->wos_atif_sayisi }}" class="textFull form-control ng-untouched ng-pristine ng-valid" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number">
                                                         </div>
                                                         <div _ngcontent-c2="" class="form-group">
                                                             <label _ngcontent-c2="" class="birimlerLabel">Scopus H Index:</label>
-                                                            <input _ngcontent-c2="" name="scopus_h_index" class="textFull form-control ng-untouched ng-pristine ng-valid" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number">
+                                                            <input _ngcontent-c2="" name="scopus_h_index" value="{{ Auth::user()->scopus_h_index }}" class="textFull form-control ng-untouched ng-pristine ng-valid" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number">
                                                         </div>
 
                                                         <div _ngcontent-c2="" class="form-group">
                                                             <label _ngcontent-c2="" class="birimlerLabel">Scopus Atıf Sayısı:</label>
-                                                            <input _ngcontent-c2="" name="scopus_atif_sayisi" class="textFull form-control ng-untouched ng-pristine ng-valid" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number">
+                                                            <input _ngcontent-c2="" name="scopus_atif_sayisi" value="{{ Auth::user()->scopus_atif_sayisi }}" class="textFull form-control ng-untouched ng-pristine ng-valid" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number">
                                                         </div>
 
                                                         <!----><div _ngcontent-c2="" class="form-group">
                                                             <label _ngcontent-c2="" class="birimlerLabel">Uzmanlık Alanı 1:</label>
-                                                            <input _ngcontent-c2="" name="uzmanlik_alani" class="textFull form-control ng-untouched ng-pristine ng-valid" placeholder="Uzmanlık alanı giriniz..." type="text">
+                                                            <input _ngcontent-c2="" name="uzmanlik_alani"  value="{{ Auth::user()->uzmanlik_alani }}" class="textFull form-control ng-untouched ng-pristine ng-valid" placeholder="Uzmanlık alanı giriniz..." type="text">
                                                         </div>
 
                                                         <input _ngcontent-c2="" class="btn btn-success btnYeniKonuEkle" type="submit" value="Kaydet">
@@ -117,12 +121,12 @@
                                                             <th>Delete</th>
                                                         </tr>
 
-                                                        @foreach($game as $games)
+                                                        @foreach($users as $games)
                                                             @if(Auth::user()->authority == 1)
                                                                 <tr>
 
                                                                     <th>{{$games->id}}</th>
-                                                                    <td>{{$games->ogretim_elemani}}</td>
+                                                                    <td>{{$games->name}}</td>
 
                                                                     <td>{{$games->wos_h_index}}</td>
                                                                     <td>{{$games->wos_atif_sayisi}}</td>
@@ -133,7 +137,7 @@
 
 
                                                                     <td>
-                                                                        <form method="post" class="delete_form" action="{{action('FirstController@destroy', $games->id)}}">
+                                                                        <form method="post" class="delete_form" action="{{action('UserController@destroy', $games->id)}}">
                                                                             {{csrf_field()}}
                                                                             <input type="hidden" name="_method" value="DELETE"/>
                                                                             <button type="submit" class="btn btn-danger">Delete</button>
@@ -155,7 +159,7 @@
                                                                     <td>{{$games->yazarlar}}</td>
 
                                                                     <td>
-                                                                        <form method="post" class="delete_form" action="{{action('FirstController@destroy', $games->id)}}">
+                                                                        <form method="post" class="delete_form" action="{{action('UserController@destroy', $games->id)}}">
                                                                             {{csrf_field()}}
                                                                             <input type="hidden" name="_method" value="DELETE"/>
                                                                             <button type="submit" class="btn btn-danger">Delete</button>
@@ -254,22 +258,33 @@
                                                     <input _ngcontent-c2="" name="isim"  class="textFull form-control ng-untouched ng-pristine ng-valid" maxlength="100" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="string">
 
                                                 </div>
-                                                    @foreach($users as $item)
-                                                        <option _ngcontent-c2=""  value="{{$item->name}}" >{{$item->name}}</option>
-                                                    @endforeach
+
                                                 <div _ngcontent-c2="" class="form-group">
                                                     <label for="yazarlar" class="birimlerLabel" style="width:25%">Yazar Listesi:(Birden Fazla Seçebilirsiniz)</label>
 
 
+                                                    <select id='pre-selected-options' multiple='multiple'>
+                                                        <option value='elem_1' selected>elem 1</option>
+                                                        <option value='elem_2'>elem 2</option>
+                                                        <option value='elem_3'>elem 3</option>
+                                                        <option value='elem_4' selected>elem 4</option>
+                                                        ...
+                                                        <option value='elem_100'>elem 100</option>
+                                                    </select>
+                                                    <link href="{{ asset('css/multi-select.css') }}" media="screen" rel="stylesheet" type="text/css">
 
-                                                    <select class="form-control"  multiple="multiple" name="yazarlar" id="yazarlar_id" style="width:70%">
+
+
+                                                    <!--<select multiple='multiiple'   name="yazarlar[]"  id='keep' style="width:70%">
 
 
                                                         @foreach($users as $item)
                                                             <option value="{{$item->name}}" >{{$item->name}}</option>
                                                         @endforeach
-                                                    </select>
+                                                    </select>-->
                                                 </div>
+
+
                                                 <div _ngcontent-c2="" class="form-group">
                                                     <label _ngcontent-c2="" class="birimlerLabel">Dergi Adı:</label>
                                                     <input _ngcontent-c2="" name="dergi_adi" class="textFull form-control ng-untouched ng-pristine ng-valid" maxlength="20" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="string">
@@ -703,5 +718,8 @@
         </div>
     </div>
     <br></div>
+
+</div>
+
 
 @endsection

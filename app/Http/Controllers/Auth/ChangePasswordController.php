@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\auth;
+namespace Arved\Http\Controllers\auth;
 
 use Hash;
 use Auth;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Arved\Http\Controllers\Controller;
 
 class ChangePasswordController extends Controller
 {
