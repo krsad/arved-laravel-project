@@ -61,7 +61,8 @@
                             </div>
 
                             <div _ngcontent-c2="" class="form-group">
-                                <label for="yazarlar" class="birimlerLabel" style="width:25%">Yazar Listesi:(Birden Fazla Seçebilirsiniz)</label>
+                                <label for="yazarlar" class="birimlerLabel" style="width:25%">Yazar Listesi:(Birden fazla girerken ',' ile ayırınız!)</label>
+                                <input _ngcontent-c2="" name="yazarlar" value="{{ $makale->isim }}" class="textFull form-control ng-untouched ng-pristine ng-valid" maxlength="100" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="text">
 
 
 

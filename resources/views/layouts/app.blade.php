@@ -10,9 +10,7 @@
     <title>{{ config('app.name', 'laravel') }}</title>
     <!-- Scripts -->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
 
 
 
@@ -111,8 +109,13 @@
     </div>
 </body>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+<script src="{{ asset('js/jquery.multi-select.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/app.js') }}" defer></script>
 
 <script>
+    /*
     $(document).ready(function(){
         $('.delete_form').on('submit',function(){
             if(confirm("Silmek istediğine emin misin?")){
@@ -122,14 +125,18 @@
                 return false;
             }
         });
+
     });
+    */
+    $('#pre-selected-options').multiSelect();
 
 </script>
-<script src="{{ asset('js/jquery.multi-select.js') }}" type="text/javascript"></script>
+
 
 <script type="text/javascript">
     // run callbacks
-    $('#pre-selected-options').multiSelect();
+
+
 </script>
 
 </html>

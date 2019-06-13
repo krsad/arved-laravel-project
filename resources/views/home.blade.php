@@ -260,18 +260,10 @@
                                                 </div>
 
                                                 <div _ngcontent-c2="" class="form-group">
-                                                    <label for="yazarlar" class="birimlerLabel" style="width:25%">Yazar Listesi:(Birden Fazla Seçebilirsiniz)</label>
+                                                    <label for="yazarlar" class="birimlerLabel" style="width:25%">Yazar Listesi:(Birden fazla girerken ',' ile ayırınız!)</label>
+                                                    <input _ngcontent-c2="" name="yazarlar"  class="textFull form-control ng-untouched ng-pristine ng-valid" maxlength="100" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="string">
 
 
-                                                    <select id='pre-selected-options' multiple='multiple'>
-                                                        <option value='elem_1' selected>elem 1</option>
-                                                        <option value='elem_2'>elem 2</option>
-                                                        <option value='elem_3'>elem 3</option>
-                                                        <option value='elem_4' selected>elem 4</option>
-                                                        ...
-                                                        <option value='elem_100'>elem 100</option>
-                                                    </select>
-                                                    <link href="{{ asset('css/multi-select.css') }}" media="screen" rel="stylesheet" type="text/css">
 
 
 

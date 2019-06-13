@@ -27,7 +27,7 @@ class MakaleController extends Controller
         $makale->yayin_turu = $request->input('yayin_turu');
         $makale->endeks_turu = $request->input('endeks_turu');
         $makale->isim = $request->input('isim');
-        $makale->yazarlar = implode($request->input('yazarlar'),', ');
+        $makale->yazarlar = $request->input('yazarlar');
 
         $makale->dergi_adi = $request->input('dergi_adi');
         $makale->konferans_adi = $request->input('konferans_adi');
@@ -79,7 +79,7 @@ class MakaleController extends Controller
         $makale->endeks_turu = $request->get('endeks_turu');
         $makale->isim = $request->get('isim');
 
-        $makale->yazarlar = implode($request->get('yazarlar'),', ');
+        $makale->yazarlar = $request->get('yazarlar');
 
         $makale->dergi_adi = $request->get('dergi_adi');
         $makale->konferans_adi = $request->get('konferans_adi');
